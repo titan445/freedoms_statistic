@@ -27,13 +27,13 @@ class Controller_Core extends Controller_Template
     public function after()
     { 
                
-        if(Request::initial()->is_ajax() && ! ControllerCore::$json_loaded)
+        if(Request::initial()->is_ajax() && !  Controller_Core ::$json_loaded)
         {
             //ajax, но требуется отправить только content без основного шаблона
             $this->response->body($this->template->content);
             
         }
-        else if(Request::initial()->is_ajax() && ControllerCore::$json_loaded)
+        else if(Request::initial()->is_ajax() &&  Controller_Core ::$json_loaded)
         {
             $this->request->headers('Content-Type', 'application/json');
             $this->response->body($this->template->content->ajax_data());

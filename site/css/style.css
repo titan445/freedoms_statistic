@@ -134,7 +134,7 @@ img {
     left: 5%;
     display: none;
     background-color: #fff;
-    opacity: 0.7;
+    opacity: 0.9;
     width: 90%;
     height: 90%;
     margin: 0 auto;
@@ -147,7 +147,7 @@ img {
     left: 5%;
     display: none;
     background-color: #fff;
-    opacity: 0.7;
+    opacity: 0.9;
     width: 400px;
     height: 245px;
 }
@@ -174,12 +174,29 @@ img {
     font-size: 16px;
 }
 #register-modal {
-     position: absolute;
+    position: absolute;
     top: 5%;
     left: 5%;
     display: none;
     background-color: #fff;
-    opacity: 0.7;
-    width: 400px;
-    height: 400px;
+    opacity: 0.9;
+    width: 380px;
+    height: 360px;
+}
+
+.one-line {
+    clear: both;
+}
+.one-line lable {
+    float: left;
+    width: 130px;
+}
+.one-line input {
+    float: right;
+    width: 150px;
+}
+
+.one-line select {
+    float: right;
+    width: 155px;
 }

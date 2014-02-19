@@ -1,19 +1,17 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
+
+defined('SYSPATH') or die('No direct script access.');
 
 // -- Environment setup --------------------------------------------------------
-
 // Load the core Kohana class
-require SYSPATH.'classes/Kohana/Core'.EXT;
+require SYSPATH . 'classes/Kohana/Core' . EXT;
 
-if (is_file(APPPATH.'classes/Kohana'.EXT))
-{
-	// Application extends the core
-	require APPPATH.'classes/Kohana'.EXT;
-}
-else
-{
-	// Load empty core extension
-	require SYSPATH.'classes/Kohana'.EXT;
+if (is_file(APPPATH . 'classes/Kohana' . EXT)) {
+    // Application extends the core
+    require APPPATH . 'classes/Kohana' . EXT;
+} else {
+    // Load empty core extension
+    require SYSPATH . 'classes/Kohana' . EXT;
 }
 
 /**
@@ -70,10 +68,9 @@ mb_substitute_character('none');
  */
 I18n::lang('en-us');
 
-if (isset($_SERVER['SERVER_PROTOCOL']))
-{
-	// Replace the default protocol.
-	HTTP::$protocol = $_SERVER['SERVER_PROTOCOL'];
+if (isset($_SERVER['SERVER_PROTOCOL'])) {
+    // Replace the default protocol.
+    HTTP::$protocol = $_SERVER['SERVER_PROTOCOL'];
 }
 
 /**
@@ -81,10 +78,9 @@ if (isset($_SERVER['SERVER_PROTOCOL']))
  *
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
- */$_SERVER['KOHANA_ENV'] = 'PRODUCTION';
-if (isset($_SERVER['KOHANA_ENV']))
-{
-	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
+ *///$_SERVER['KOHANA_ENV'] = 'PRODUCTION';
+if (isset($_SERVER['KOHANA_ENV'])) {
+    Kohana::$environment = constant('Kohana::' . strtoupper($_SERVER['KOHANA_ENV']));
 }
 
 /**
@@ -103,16 +99,15 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/',
-        'index_file' => FALSE,
-        'profile' => FALSE,
-    
+    'base_url' => '/',
+    'index_file' => FALSE,
+    'profile' => FALSE,
 ));
 Cookie::$salt = '  JKDHBSA UIKD*(#@!sdds54645';
 /**
  * Attach the file write to logging. Multiple writers are supported.
  */
-Kohana::$log->attach(new Log_File(APPPATH.'logs'));
+Kohana::$log->attach(new Log_File(APPPATH . 'logs'));
 
 /**
  * Attach a file reader to config. Multiple readers are supported.
@@ -123,29 +118,44 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	 'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	 'database'   => MODPATH.'database',   // Database access
-	// 'image'      => MODPATH.'image',      // Image manipulation
-	// 'minion'     => MODPATH.'minion',     // CLI Tasks
-	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-	));
+    'auth' => MODPATH . 'auth', // Basic authentication
+    // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+    // 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
+    'database' => MODPATH . 'database', // Database access
+    // 'image'      => MODPATH.'image',      // Image manipulation
+    // 'minion'     => MODPATH.'minion',     // CLI Tasks
+    'orm' => MODPATH . 'orm', // Object Relationship Mapping
+        // 'unittest'   => MODPATH.'unittest',   // Unit testing
+        // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+));
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+
+Route::set('admin_comands_add', 'admin/comands/add')
+        ->defaults(array(
+            'controller' => 'Admin_Comands',
+            'action' => 'add',
+        ));
+
+Route::set('admin_comands_delete', 'admin/comands/delete/<comands_id>', array(
+            'comands_id' => '\d+',
+        ))
+        ->defaults(array(
+            'controller' => 'Admin_Comands',
+            'action' => 'delete',
+        ));
+
 Route::set('kaynake', 'kaynake')
-	->defaults(array(
-		'controller' => 'main',
-		'action'     => 'kaynake',
-	));
+        ->defaults(array(
+            'controller' => 'main',
+            'action' => 'kaynake',
+        ));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
-	->defaults(array(
-		'controller' => 'main',
-		'action'     => 'index',
-	));
+        ->defaults(array(
+            'controller' => 'main',
+            'action' => 'index',
+        ));
