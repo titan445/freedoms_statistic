@@ -168,10 +168,13 @@ img {
 }
 
 .close {
-    text-align: right;
     cursor: pointer;
     padding: 10px;
     font-size: 16px;
+
+    position: absolute;
+    left: 97%;
+    width: 50px;
 }
 #register-modal {
     position: absolute;
@@ -199,4 +202,20 @@ img {
 .one-line select {
     float: right;
     width: 155px;
+}
+.kynake_table {
+
+}
+
+.user-editin-kaynake{
+    display: none;
+    width: 100%;
+    height: 300px;
+}
+#add-new-data {
+    margin-left: 20px;
+}
+#add-new-data p {
+    color: #000;
+    font-size: 14px;
 }

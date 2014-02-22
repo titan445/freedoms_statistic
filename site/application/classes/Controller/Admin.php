@@ -18,7 +18,8 @@ class Controller_Admin extends Controller_Core
 
     public function action_index()
     {
-        $this->template->comands = ORM::factory('Comand')->find_all();
+        $this->template->content = new ViewCore('admin/index');
+        $this->template->content->comands = ORM::factory('Comand')->find_all();
         
     }
 

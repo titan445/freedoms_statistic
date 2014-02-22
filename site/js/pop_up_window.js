@@ -25,6 +25,7 @@ Pop_Up_Window = (function() {
          * @returns {undefined}
          */
         add_window: function(id_jquery, id_open_jquery) {
+
             params = {
                 buttom_opene: id_jquery,
                 div_open: id_open_jquery

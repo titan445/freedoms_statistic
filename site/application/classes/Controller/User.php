@@ -47,18 +47,19 @@ class Controller_User extends Controller_Core
             try {
                 $user = ORM::factory('User')
                         ->create_user($_POST, array('comands_id', 'username', 'email', 'password'))    // Регистрируем пользователя
-                        ->add('roles', ORM::factory('role', array('name' => 'login')));  // Добавляем роль login
+                        ->add('roles', ORM::factory('Role', array('name' => 'login')));  // Добавляем роль login
 
                 Auth::instance()->force_login($user->email);
                 $this->redirect('/', 302);
             } catch (ORM_Validation_Exception $e) {
                 $errors = $e->errors('');
 
-                //delete externals
-                $external = $errors['_external'];
-                $errors += $external;
-                unset($errors['_external']);
-
+                if (isset($errors['_external'])) {
+                    //delete externals
+                    $external = $errors['_external'];
+                    $errors += $external;
+                    unset($errors['_external']);
+                }
                 $this->template->error = array_pop($errors);
             }
         } else

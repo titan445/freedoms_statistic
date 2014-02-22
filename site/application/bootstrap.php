@@ -134,6 +134,36 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('people_search', 'main/search')
+        ->defaults(array(
+            'controller' => 'People',
+            'action' => 'search',
+        ));
+
+Route::set('admin_user_event', 'admin/event')
+        ->defaults(array(
+            'controller' => 'Admin_Event',
+            'action' => 'index',
+        ));
+
+Route::set('admin_user_add', 'admin/add')
+        ->defaults(array(
+            'controller' => 'Admin_User',
+            'action' => 'add_role',
+        ));
+
+Route::set('admin_user_delete', 'admin/delete')
+        ->defaults(array(
+            'controller' => 'Admin_User',
+            'action' => 'delete_roles',
+        ));
+
+Route::set('admin_user_get', 'admin/user')
+        ->defaults(array(
+            'controller' => 'Admin_User',
+            'action' => 'index',
+        ));
+
 Route::set('admin_comands_add', 'admin/comands/add')
         ->defaults(array(
             'controller' => 'Admin_Comands',
