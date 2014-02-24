@@ -21,7 +21,7 @@ class Controller_Events extends Controller_Core
             return;
         }
 
-        $event = ORM::factory('event');
+        $event = ORM::factory('Event');
 
 
         $event->values($_POST, array('link', 'name', 'time'));
@@ -41,7 +41,7 @@ class Controller_Events extends Controller_Core
                     
                     $sql .= "({$com->id}, '{$datetime }'), ";
                 } else {
-                    $this->template->content->error = 'erroor? huy znaent';
+                    $this->template->content->error = 'Ошибка 13 , обратитесь к администратору.' ;
                 }
             }
 

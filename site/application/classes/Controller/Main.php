@@ -5,7 +5,7 @@ defined('SYSPATH') or die('No direct script access.');
 class Controller_Main extends Controller_Core
 {
 
-    const PRICE_HONOR = 1;
+    const PRICE_HONOR = 25;
 
     public function action_index()
     {

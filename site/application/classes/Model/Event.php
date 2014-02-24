@@ -15,6 +15,8 @@ class Model_Event extends ORM
         'people' => array(
             'model' => 'People',
             'through' => 'visits',
+            'far_key' => 'person_id',       
+            'foreign_key' => 'event_id' 
         )
     );
     

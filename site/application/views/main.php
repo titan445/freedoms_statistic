@@ -154,7 +154,7 @@
                 </div>
 
                 <div class="user-editin-kaynake" id="add-new-data">
-                    <p>
+                    <p> 
                         Начните вводить имя пользователя: 
                         <input id="players-add" type="text" autocomplete="on"/>    
                     </p>
@@ -199,10 +199,10 @@
 
                                 <?php
                                 foreach ($days as $date) {
-                                    if (isset($statistics[$val['id']][$date])) {
+                                    if (isset($statistics[$val['comand_id']][$date])) {
                                         ?>
                                         <td  class="table-date">
-                                            <?= $statistics[$val['id']][$date] ?>
+                                            <?= $statistics[$val['comand_id']][$date] ?>
                                         </td>
                                     <?php } else { ?>
                                         <td class="table-date"></td>
