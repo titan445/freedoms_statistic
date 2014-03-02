@@ -1,20 +1,20 @@
 <h2 align="center">События</h2>
 <table align="center" cellspacing="5" cellpadding="10" border="1">
     <?php if (isset($events)) 
-    foreach ($events as $name_events => $event) { ?> 
+    foreach ($events as $event) { ?> 
         <tr>
             <td>
-                <?= $name_events ?>
+                 <?= $event['name'] ?>
             </td>
             <td>
                 <?= $event['time'] ?>
             </td>
             <td>
-                <?= $event['link'] ?>
+             <img src="<?= $event['link'] ?>" width="900" height="600" />
             </td>
             <td>
                 
-                <?= implode(", ", $event['name']) ?>
+                <?= implode(", ", $event['players']) ?>
             </td>
         </tr>
     <?php } ?>

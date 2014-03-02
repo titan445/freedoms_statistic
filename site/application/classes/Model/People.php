@@ -7,12 +7,14 @@ class Model_People extends ORM
         'comand' => array(
             'model' => 'Comand',
             'through' => 'squad',
-            'far_key' => 'comand_id',       
-            'foreign_key' => 'person_id' 
+            'far_key' => 'comand_id',
+            'foreign_key' => 'person_id'
         ),
         'event' => array(
             'model' => 'Event',
             'through' => 'visits',
+            'far_key' => 'event_id',
+            'foreign_key' => 'person_id'
         ),
     );
 

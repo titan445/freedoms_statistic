@@ -13,15 +13,27 @@ class Controller_Main extends Controller_Core
         $this->template->comands = ORM::factory('Comand')->find_all();
 
         $modelComands = new Model_Comand();
-        $curent_credits = $modelComands->getFullStatistics(self::PRICE_HONOR);
+       
 
-
+        $days_extras = DB::select('day')
+                ->distinct(true)
+                ->from('records')
+                ->order_by('day', 'DESC')
+                ->limit(7)
+                ->execute()
+                ->as_array();
+        
+        $days_extras = array_map(function ($item) {
+            return "'" . $item['day'] . "'";
+        }, $days_extras);
+        
+        
+         $curent_credits = $modelComands->getFullStatistics(self::PRICE_HONOR, $days_extras);
         $records = ORM::factory('Record')
-                ->select()
                 ->join('comands')
                 ->on('comands.id', '=', 'id_comand')
+                ->where('day', 'IN', DB::expr("(" . implode(', ', $days_extras) . ")"))
                 ->order_by('record.day', 'DESC')
-                ->limit(7)
                 ->find_all();
 
 
@@ -31,6 +43,10 @@ class Controller_Main extends Controller_Core
             $days[$val->day] = $val->day;
             $statistics[$val->id_comand][$val->day] = $val->credits;
         }
+        //natcasesort($days); //естественная сортировка
+        
+
+
 
         $this->template->kayanke_table = $curent_credits;
         $this->template->statistics = $statistics;
@@ -97,6 +113,7 @@ class Controller_Main extends Controller_Core
             throw new HTTP_Exception_404;
         }
         $comand->remove('people', $people);
+        $people->delete();
     }
 
 }

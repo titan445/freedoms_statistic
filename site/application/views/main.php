@@ -155,19 +155,24 @@
 
                 <div class="user-editin-kaynake" id="add-new-data">
                     <p> 
-                        Начните вводить имя пользователя: 
+                        Начните вводить ник персонажа: 
                         <input id="players-add" type="text" autocomplete="on"/>    
                     </p>
 
                     <div id="users-add_events">
 
                     </div>
-
-                    <p>Ссылка <input type="text" id="link-add-user" class="link"></p>
+                    <div style='width:700px;'>
+                    После всплытия подсказки о нике персонажа, нажмите на появившийся ник.
+                        Для добавления еще одного участника события сотрите ник и начните вводить следующего.
+                    </div>
+                    <p>Ссылка <input type="text" id="link-add-user" class="link" style='width:450px;'></p>
                     <p>Дата:<br> <input type="text" id="date-add-event"></p>
                     <p>Названия события: <input type="text" id="name-add-event"></p>
 
-                    <p><input class="add_user" type="button" onclick="AddEvents()" value="Добавить" /></p>
+                    <p><input class="add_user" type="button" onclick="AddEvents()" value="Добавить новое событие" />
+                    <br> (Нажимать после заполнения всех полей)
+                    </p>
                 </div>
             <?php } ?>
             <div class='kynake_table'>
@@ -214,6 +219,9 @@
                             </tr>                    
                         <?php } ?>
                 </table>
+                <div style='margin-top: 30px; margin-left: 5%; font-size: 16px; width: 60%;'>
+                Если вы не увидели в таблице своего отряда это не значит, что он не учтен, просто вы не оставили за последнии 7 дней 
+                ни одной записи о себе.<br> Как только вы добавите новый отчет, ваш отряд появится на главной странице. </div>
             </div>
         </div>
         <div id="enter-modal">

@@ -24,24 +24,31 @@ class Controller_Events extends Controller_Core
         $event = ORM::factory('Event');
 
 
-        $event->values($_POST, array('link', 'name', 'time'));
+        $event->values($_POST, array('link', 'name'));
         try {
+            $event->time = date("Y-m-d H:i:s", strtotime($this->request->post('time')));
+
             $people = ORM::factory('People')
                     ->where('name', 'IN', DB::expr("($users)"))
                     ->find_all();
+            $people_ids = array();
+            foreach ($people as $val) {
+                $people_ids[] = $val->id; 
+            }
+
             $event->save();
-            $event->add('people', $people);
+            $event->add('people', $people_ids);
 
             //@todo сделать одним join'ом
             $sql = 'INSERT INTO records (id_comand,day) VALUES ';
             foreach ($people as $lol) {
                 $com = $lol->comand->find();
                 if ($com->loaded()) {
-                    $datetime = date("Y-m-d", strtotime($event->time)); 
-                    
+                    $datetime = date("Y-m-d", strtotime($event->time));
+
                     $sql .= "({$com->id}, '{$datetime }'), ";
                 } else {
-                    $this->template->content->error = 'Ошибка 13 , обратитесь к администратору.' ;
+                    $this->template->content->error = 'Ошибка 13 , обратитесь к администратору.';
                 }
             }
 
@@ -60,9 +67,9 @@ class Controller_Events extends Controller_Core
                 unset($errors['_external']);
             }
             $this->template->content->error = array_pop($errors);
-        } /*catch (Kohana_Exception $e) {
-            $this->template->content->error = 'Ошибка на сервере, попробуйте еще раз.';
-        }*/
+        } /* catch (Kohana_Exception $e) {
+          $this->template->content->error = 'Ошибка на сервере, попробуйте еще раз.';
+          } */
     }
 
 }
